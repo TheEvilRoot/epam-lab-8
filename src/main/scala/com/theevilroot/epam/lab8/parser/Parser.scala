@@ -32,7 +32,7 @@ class Parser {
     }
     case InstructionStatement(command, Some(selector), pred) => command match {
       case SelectCommand(Some(fields)) => SelectCommit(fields, Option.apply(selector.name), pred)
-      case InsertCommand(Some(pairs)) => new InsertCommit(pairs, Option.apply(selector.name), pred)
+      case InsertCommand(Some(pairs)) => InsertCommit(pairs, Option.apply(selector.name), pred)
       case UpdateCommand(Some(pairs)) => UpdateCommit(pairs, Option.apply(selector.name), pred)
       case _ => throw new RuntimeException("Not enough information for command " + command.name)
     }

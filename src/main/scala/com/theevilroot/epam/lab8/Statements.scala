@@ -32,7 +32,7 @@ object Statements {
     case class NullStatement() extends RStatement("null")
 
     case class EqualsStatement(val varName: NameStatement,
-                               val value: Statement) extends Statement(varName + "=" + value) {
+                               val value: RStatement) extends Statement(varName + "=" + value) {
       override def toString: String =
         "equals[" + varName + "=" + value + "]"
     }
