@@ -2,19 +2,24 @@ package com.theevilroot.epam.lab8.model
 
 import scala.collection.mutable
 
-class DatabaseManager {
+class DatabaseManager[A] {
 
-  val databases: mutable.Map[String, Database] = mutable.Map()
-  var selectedDatabase: Database = _
+  val databases: mutable.Map[String, Database[A]] = mutable.Map()
+  var selectedDatabase: Database[A] = _
 
-  def drop(tableName: String): Boolean = databases.contains(tableName) match {
-    case false => false
-    case true => databases.remove(tableName) true
+  def drop(databaseName: String): Boolean = databases.remove(databaseName) match {
+    case None => false
+    case Some(_) => true
   }
 
-  def create(tableName: String): Boolean = databases.contains(tableName) match {
-    case true => false
-    case false => databases.addOne((tableName, new Database(tableName))) true
+  def create(databaseName: String): Boolean = databases.put(databaseName, new Database[A](databaseName)) match {
+    case None => true
+    case Some(_) => false
+  }
+
+  def selectDatabase(databaseName: String): Boolean = databases.get(databaseName) match {
+    case None => false
+    case Some(_) => true
   }
 
 }

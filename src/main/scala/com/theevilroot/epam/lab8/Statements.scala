@@ -14,7 +14,7 @@ object Statements {
 
     class RStatement(value: String) extends Statement(value)
 
-    class LiteralStatement(val value: String) extends RStatement(value) {
+    case class LiteralStatement(val value: String) extends RStatement(value) {
       override def toString: String =
         "literal[" + value + "]"
     }
